@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import { DataProvider } from './components/DataContext';
 import './App.css';
+import './assets/css/imgHome.css';
+import ImgHome from "./components/ImgHome";
+import ComboBoxContainer from './components/ComboBoxContainer';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const datosDinamicos = {
+    widthScreen: 0,
+    heightScreen: 0,
+    widthImg: 0,
+    heightImg: 0,
+    displayTxtMouse: 'none'
+}
+
+return (
+  <DataProvider value={datosDinamicos}>
+  <div className="App">
+    <header className="App-header">
+      <ImgHome/>
+      <ComboBoxContainer />
+    </header>
+  </div>
+  </DataProvider>
+);
 }
 
 export default App;
