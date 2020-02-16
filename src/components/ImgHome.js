@@ -88,6 +88,10 @@ class ImgHome extends React.Component{
       };
 
     render(){
+        var sContent = this.context.widthImg + ' - ' +
+                this.context.heightImg + ' - ' +
+                this.context.widthScreen + ' - ' +
+                this.context.heightScreen;
         if (this.context.widthImg === 0 || this.context.heightImg === 0) {
             return (
                 <img
@@ -104,9 +108,14 @@ class ImgHome extends React.Component{
         return (
             
             <div style={{backGroundColor:'black'}}>
+                <textarea rows = "5" cols = "50" 
+                    className="textAreaPrueba"
+                value={sContent}>
+                
+                </textarea>
             <img
                 ref={this.refImgCentral}
-                style={{display:"flex"}} 
+               
                 width={this.context.widthImg} 
                 height={this.context.heightImg} 
                 border="0" 
@@ -126,3 +135,7 @@ class ImgHome extends React.Component{
 }
 
 export default ImgHome;
+
+
+// style={{display:"flex"}} 
+// --> Para la imagen

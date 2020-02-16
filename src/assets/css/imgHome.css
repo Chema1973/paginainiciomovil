@@ -311,3 +311,10 @@ div {
   left: 10px;
   width:150px;
 }
+
+.textAreaPrueba {
+  z-index: 111;
+  position: fixed;
+  top: 10px;
+  left:10px;
+}
