@@ -91,7 +91,9 @@ class ImgHome extends React.Component{
         var sContent = this.context.widthImg + ' - ' +
                 this.context.heightImg + ' - ' +
                 this.context.widthScreen + ' - ' +
-                this.context.heightScreen;
+                this.context.heightScreen + ' - ' + 
+                window.screen.height + ' - ' + 
+                window.screen.width;
         if (this.context.widthImg === 0 || this.context.heightImg === 0) {
             return (
                 <img
