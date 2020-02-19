@@ -1,4 +1,5 @@
 import React from 'react';
+// import { StyleSheet, View, Image, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import DataContext from './DataContext';
 // import Coordenadas from './Coordenadas';
 import ImgIcono from './ImgIcono';
@@ -31,19 +32,42 @@ class ImgHome extends React.Component{
             this.refImgCentral = React.createRef();
         }
 
-
+        // console.log('componentDidMount');
         window.addEventListener('resize', this.updateDimensions.bind(this));
+        const oHeight = document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight;
+        const oWidth = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
 
-        this.setState({
+        if (oHeight > oWidth) {
+            // console.log('Vertical - Es más alto');
+            this.setState({
+                widthScreen: undefined,
+                heightScreen: document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight,
+                widthImg: (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth) - data.dataConf.marginbody, // oImgSize.width,  //  window.innerWidth - data.dataConf.marginbody, // document.getElementById('imgHome').offsetWidth,
+                heightImg: (document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight) - data.dataConf.marginbody //  oImgSize.height // window.innerHeight - data.dataConf.marginbody //  document.getElementById('imgHome').offsetHeight
+            });
+        } else {
+            // console.log('Horizontal - Es más ancho');
+            this.setState({
+                widthScreen: document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth,
+                heightScreen: document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight,
+                widthImg: (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth) - data.dataConf.marginbody, // oImgSize.width,  //  window.innerWidth - data.dataConf.marginbody, // document.getElementById('imgHome').offsetWidth,
+                heightImg: (document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight) - data.dataConf.marginbody //  oImgSize.height // window.innerHeight - data.dataConf.marginbody //  document.getElementById('imgHome').offsetHeight
+            });
+        }
+        /* this.setState({
             widthScreen: document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth,
             heightScreen: document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight,
             widthImg: (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth) - data.dataConf.marginbody, // oImgSize.width,  //  window.innerWidth - data.dataConf.marginbody, // document.getElementById('imgHome').offsetWidth,
             heightImg: (document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight) - data.dataConf.marginbody //  oImgSize.height // window.innerHeight - data.dataConf.marginbody //  document.getElementById('imgHome').offsetHeight
-        });
+        }); */
         this.context.widthImg = this.state.widthImg;
         this.context.heightImg = this.state.heightImg;
         this.context.widthScreen = this.state.widthScreen;
         this.context.heightScreen = this.state.heightScreen;
+
+        console.log('Chema::Punto De Control::');
+        console.log(document.getElementById("imgHome").style);
+
         /* console.log(window.innerWidth + ' || ' + document.documentElement.clientWidth + ' || ' + document.body.clientWidth,);
         console.log('Chema::Punto De Control::DidMouth');
         console.log(this.context.widthImg + ' - ' + this.context.heightImg);
@@ -64,13 +88,32 @@ class ImgHome extends React.Component{
     }
 
     updateDimensions = () => {
-
-        this.setState({
+        console.log('updateDimensions')
+        const oHeight = document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight;
+        const oWidth = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
+        if (oHeight > oWidth) {
+            // console.log('Vertical - Es más alto');
+            this.setState({
+                widthScreen: undefined,
+                heightScreen: this.getWindowHeight(),
+                widthImg: this.getWindowWidth() - data.dataConf.marginbody,
+                heightImg: this.getWindowHeight() - data.dataConf.marginbody
+            });
+        } else {
+            // console.log('Horizontal - Es más ancho');
+            this.setState({
+                widthScreen: this.getWindowWidth(),
+                heightScreen: this.getWindowHeight(),
+                widthImg: this.getWindowWidth() - data.dataConf.marginbody,
+                heightImg: this.getWindowHeight() - data.dataConf.marginbody
+            });
+        }
+        /* this.setState({
             widthScreen: this.getWindowWidth(),
             heightScreen: this.getWindowHeight(),
             widthImg: this.getWindowWidth() - data.dataConf.marginbody,
             heightImg: this.getWindowHeight() - data.dataConf.marginbody
-        });
+        }); */
         this.context.widthScreen = this.state.widthScreen;
         this.context.heightScreen = this.state.heightScreen;
         this.context.widthImg = this.state.widthImg;
@@ -86,11 +129,19 @@ class ImgHome extends React.Component{
 
 
       };
-
+      
+      oPrueba = (evt) => {
+        // console.log('oPrueba');
+      };
     render(){
-        var sContent = this.context.widthImg + ' - ' +
+        /* var sContent = this.context.widthImg + ' - ' +
                 this.context.heightImg + ' - ' +
                 this.context.widthScreen + ' - ' +
+                this.context.heightScreen + ' - ' + 
+                window.screen.height + ' - ' + 
+                window.screen.width; */
+
+                var sContent = this.context.widthScreen + ' - ' +
                 this.context.heightScreen + ' - ' + 
                 window.screen.height + ' - ' + 
                 window.screen.width;
@@ -112,14 +163,16 @@ class ImgHome extends React.Component{
             <div style={{backGroundColor:'black'}}>
                 <textarea rows = "5" cols = "50" 
                     className="textAreaPrueba"
+                    onChange={this.oPrueba}
                 value={sContent}>
                 
                 </textarea>
             <img
+            style= {{flex:1 , width: this.state.widthScreen, height: this.state.heightScreen}}  
                 ref={this.refImgCentral}
                
-                width={this.context.widthImg} 
-                height={this.context.heightImg} 
+                width={this.state.widthScreen} 
+                height={this.state.heightScreen} 
                 border="0" 
                 id="imgHome" 
                 src={imgCentral} 

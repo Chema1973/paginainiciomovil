@@ -46,7 +46,7 @@ class ComboBoxContainer extends React.Component{
 
 
     createHelpCombo  = () => {
-        console.log('Chema::Punto De Control::createHelpCombo');
+        // console.log('Chema::Punto De Control::createHelpCombo');
         if (!data.dataCombos.find(element => element.comboid === 'help')) {
 
             var oObjHelp = {

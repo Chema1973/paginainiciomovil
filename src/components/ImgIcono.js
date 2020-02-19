@@ -31,8 +31,8 @@ class ImgIcono extends React.Component{
     componentDidMount(){
         this.setIconoPosition();
         window.addEventListener('resize', this.setIconoPosition);
-        console.log('Chema::Punto De Control::');
-        console.log(this.props.IconoObjecto);
+        // console.log('Chema::Punto De Control::');
+        // console.log(this.props.IconoObjecto);
     }
 
     componentWillUnmount() {
