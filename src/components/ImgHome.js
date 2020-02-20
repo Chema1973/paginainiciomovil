@@ -156,12 +156,12 @@ class ImgHome extends React.Component{
         } else {
         return (
             
-            <div style={{backGroundColor:'black'}}>
+            <div style={{backGroundColor:'black',width: this.state.widthScreen, height: this.state.heightScreen}}>
                
             <img
             style= {{flex:1 , width: this.state.widthScreen, height: this.state.heightScreen}}  
                 ref={this.refImgCentral}
-               
+               className="fillImage"
                 width={this.state.widthScreen} 
                 height={this.state.heightScreen} 
                 border="0" 
