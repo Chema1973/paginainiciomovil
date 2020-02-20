@@ -31,8 +31,10 @@ class ImgHome extends React.Component{
         if (!this.refImgCentral) {
             this.refImgCentral = React.createRef();
         }
+        const appHeader = document.getElementsByClassName("App-header")[0];
 
-        // console.log('componentDidMount');
+        console.log('componentDidMount');
+        // console.log(appHeader.clientHeight);
         window.addEventListener('resize', this.updateDimensions.bind(this));
         // const oHeight = document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight;
         // const oWidth = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
@@ -55,8 +57,8 @@ class ImgHome extends React.Component{
             });
         } */
         this.setState({
-            widthScreen: document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth,
-            heightScreen: document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight,
+            widthScreen: appHeader.clientWidth, // document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth,
+            heightScreen: appHeader.clientHeight, // document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight,
             widthImg: (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth) - data.dataConf.marginbody, // oImgSize.width,  //  window.innerWidth - data.dataConf.marginbody, // document.getElementById('imgHome').offsetWidth,
             heightImg: (document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight) - data.dataConf.marginbody //  oImgSize.height // window.innerHeight - data.dataConf.marginbody //  document.getElementById('imgHome').offsetHeight
         });
@@ -89,6 +91,7 @@ class ImgHome extends React.Component{
 
     updateDimensions = () => {
         console.log('updateDimensions')
+        const appHeader = document.getElementsByClassName("App-header")[0];
         const oHeight = document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight;
         const oWidth = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
         /* if (oHeight > oWidth) {
@@ -109,8 +112,8 @@ class ImgHome extends React.Component{
             });
         } */
         this.setState({
-            widthScreen: this.getWindowWidth(),
-            heightScreen: this.getWindowHeight(),
+            widthScreen: appHeader.clientHeight, // this.getWindowWidth(),
+            heightScreen:appHeader.clientWidth, // this.getWindowHeight(),
             widthImg: this.getWindowWidth() - data.dataConf.marginbody,
             heightImg: this.getWindowHeight() - data.dataConf.marginbody
         });
