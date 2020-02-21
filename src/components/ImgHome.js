@@ -8,6 +8,8 @@ var data = require('../data/data');
 
 
 const imgCentral = require('../assets/images/home/' + data.dataConf.centralimage);
+const imgCentral_90 = require('../assets/images/home/' + data.dataConf.centralimage_90);
+
 
 
 class ImgHome extends React.Component{
@@ -18,6 +20,8 @@ class ImgHome extends React.Component{
         super(props);
         this.refImgCentral = React.createRef();
         this.state = {
+            imgCentral: imgCentral,
+            imgCentral_90: imgCentral_90,
             widthScreen: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
             heightScreen:window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight,
             widthImg: (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) - data.dataConf.marginbody, // document.getElementById('imgHome').offsetWidth,
@@ -36,27 +40,32 @@ class ImgHome extends React.Component{
         console.log('componentDidMount');
         // console.log(appHeader.clientHeight);
         window.addEventListener('resize', this.updateDimensions.bind(this));
-        // const oHeight = document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight;
-        // const oWidth = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
-
-        /* if (oHeight > oWidth) {
+        const oHeight = document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight;
+        const oWidth = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
+        let oImgCentral;
+        if (oHeight > oWidth) {
             // console.log('Vertical - Es más alto');
-            this.setState({
+            /* this.setState({
                 widthScreen: undefined,
                 heightScreen: document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight,
                 widthImg: (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth) - data.dataConf.marginbody, // oImgSize.width,  //  window.innerWidth - data.dataConf.marginbody, // document.getElementById('imgHome').offsetWidth,
                 heightImg: (document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight) - data.dataConf.marginbody //  oImgSize.height // window.innerHeight - data.dataConf.marginbody //  document.getElementById('imgHome').offsetHeight
-            });
+            }); */
+            oImgCentral = imgCentral
+            //imgCentral_90: imgCentral_90,
         } else {
             // console.log('Horizontal - Es más ancho');
-            this.setState({
+            /* this.setState({
                 widthScreen: document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth,
                 heightScreen: document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight,
                 widthImg: (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth) - data.dataConf.marginbody, // oImgSize.width,  //  window.innerWidth - data.dataConf.marginbody, // document.getElementById('imgHome').offsetWidth,
                 heightImg: (document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight) - data.dataConf.marginbody //  oImgSize.height // window.innerHeight - data.dataConf.marginbody //  document.getElementById('imgHome').offsetHeight
-            });
-        } */
+            }); */
+            oImgCentral = imgCentral_90
+            // imgCentral_90: ,
+        }
         this.setState({
+            imgCentral: oImgCentral,
             widthScreen: appHeader.clientWidth, // document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth,
             heightScreen: appHeader.clientHeight, // document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight,
             widthImg: (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth) - data.dataConf.marginbody, // oImgSize.width,  //  window.innerWidth - data.dataConf.marginbody, // document.getElementById('imgHome').offsetWidth,
@@ -90,30 +99,36 @@ class ImgHome extends React.Component{
     }
 
     updateDimensions = () => {
-        console.log('updateDimensions')
+        console.log('updateDimensions::')
+        
         const appHeader = document.getElementsByClassName("App-header")[0];
         const oHeight = document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight;
         const oWidth = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
-        /* if (oHeight > oWidth) {
+
+        let oImgCentral;
+        if (oHeight > oWidth) {
             // console.log('Vertical - Es más alto');
-            this.setState({
+            /* this.setState({
                 widthScreen: undefined,
                 heightScreen: this.getWindowHeight(),
                 widthImg: this.getWindowWidth() - data.dataConf.marginbody,
                 heightImg: this.getWindowHeight() - data.dataConf.marginbody
-            });
+            }); */
+            oImgCentral = imgCentral
         } else {
             // console.log('Horizontal - Es más ancho');
-            this.setState({
+            /* this.setState({
                 widthScreen: this.getWindowWidth(),
                 heightScreen: this.getWindowHeight(),
                 widthImg: this.getWindowWidth() - data.dataConf.marginbody,
                 heightImg: this.getWindowHeight() - data.dataConf.marginbody
-            });
-        } */
+            }); */
+            oImgCentral = imgCentral_90
+        } 
         this.setState({
-            widthScreen: appHeader.clientHeight, // this.getWindowWidth(),
-            heightScreen:appHeader.clientWidth, // this.getWindowHeight(),
+            imgCentral: oImgCentral,
+            widthScreen: this.getWindowWidth(), // appHeader.clientHeight, //
+            heightScreen: this.getWindowHeight(), // appHeader.clientWidth, //
             widthImg: this.getWindowWidth() - data.dataConf.marginbody,
             heightImg: this.getWindowHeight() - data.dataConf.marginbody
         });
@@ -169,7 +184,7 @@ class ImgHome extends React.Component{
                 height={this.state.heightScreen} 
                 border="0" 
                 id="imgHome" 
-                src={imgCentral} 
+                src={this.state.imgCentral} 
                 alt="Imagen Central" 
                 useMap="#MapHomePage"
             />

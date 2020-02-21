@@ -1,5 +1,6 @@
 export var dataConf = {
     "centralimage": "fondo_mundo.jpg",
+    "centralimage_90": "fondo_90.jpg",
     "marginbody":1,
     "iconpath": "HomePage_files/img/",
     "thumbnailspath": "HomePage_files/img/thumbnails/",
@@ -562,3 +563,4 @@ dataCombos = dataCombos.filter(function (data) {
 // Confluence.png
 // jose.pairet
 // Ineco2018
+
