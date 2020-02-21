@@ -88,10 +88,12 @@ class ImgHome extends React.Component{
 
     getWindowWidth = () => {
         return (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth);
+        // return "100%";
     }
 
     getWindowHeight= () => {
         return (document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight);
+        // return "100%";
     }
 
     componentWillUnmount() {
@@ -102,6 +104,10 @@ class ImgHome extends React.Component{
         console.log('updateDimensions::')
         
         const appHeader = document.getElementsByClassName("App-header")[0];
+        console.log(appHeader);
+        console.log(this.getWindowWidth() + " - " + this.getWindowHeight());
+        // clientHeight
+        // clientWidth
         const oHeight = document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight;
         const oWidth = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
 
@@ -127,8 +133,8 @@ class ImgHome extends React.Component{
         } 
         this.setState({
             imgCentral: oImgCentral,
-            widthScreen: this.getWindowWidth(), // appHeader.clientHeight, //
-            heightScreen: this.getWindowHeight(), // appHeader.clientWidth, //
+            widthScreen: appHeader.clientWidth, // this.getWindowWidth(), // 
+            heightScreen: appHeader.clientHeight, // this.getWindowHeight(), // 
             widthImg: this.getWindowWidth() - data.dataConf.marginbody,
             heightImg: this.getWindowHeight() - data.dataConf.marginbody
         });
@@ -177,11 +183,11 @@ class ImgHome extends React.Component{
             <div style={{backGroundColor:'black',width: this.state.widthScreen, height: this.state.heightScreen}}>
                
             <img
-            style= {{flex:1 , width: this.state.widthScreen, height: this.state.heightScreen}}  
+            style= {{flex:1 , width: "100%", height: "100%"}}  
                 ref={this.refImgCentral}
                className="fillImage"
-                width={this.state.widthScreen} 
-                height={this.state.heightScreen} 
+                width="100%" 
+                height="100%" 
                 border="0" 
                 id="imgHome" 
                 src={this.state.imgCentral} 
@@ -199,6 +205,10 @@ class ImgHome extends React.Component{
 }
 
 export default ImgHome;
+
+// style= {{flex:1 , width: this.state.widthScreen, height: this.state.heightScreen}}  
+// width={this.state.widthScreen} 
+// height={this.state.heightScreen} 
 
 
 // style={{display:"flex"}} 
