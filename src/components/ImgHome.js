@@ -87,12 +87,14 @@ class ImgHome extends React.Component{
 
 
     getWindowWidth = () => {
-        return (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth);
+        // return (document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth);
+        return (window.screen.availWidth);
         // return "100%";
     }
 
     getWindowHeight= () => {
-        return (document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight);
+        // return (document.documentElement.clientHeight|| document.body.clientHeight || window.innerHeight);
+        return (window.screen.availHeight);
         // return "100%";
     }
 
@@ -133,8 +135,8 @@ class ImgHome extends React.Component{
         } 
         this.setState({
             imgCentral: oImgCentral,
-            widthScreen: appHeader.clientWidth, // this.getWindowWidth(), // 
-            heightScreen: appHeader.clientHeight, // this.getWindowHeight(), // 
+            widthScreen: this.getWindowWidth(), // appHeader.clientWidth, // 
+            heightScreen: this.getWindowHeight(), // appHeader.clientHeight, // 
             widthImg: this.getWindowWidth() - data.dataConf.marginbody,
             heightImg: this.getWindowHeight() - data.dataConf.marginbody
         });
@@ -164,7 +166,11 @@ class ImgHome extends React.Component{
                 window.screen.height + ' - ' + 
                 window.screen.width; */
 
-                
+                var sContent = window.innerWidth + ' - ' +
+                window.outerWidth + ' - ' + 
+                window.screen.width + ' - ' + 
+                window.screen.availWidth;
+
         if (this.context.widthImg === 0 || this.context.heightImg === 0) {
             return (
                 <img
